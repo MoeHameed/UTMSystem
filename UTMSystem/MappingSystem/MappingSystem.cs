@@ -48,22 +48,27 @@ namespace MappingSystem
                 _dbManager.InsertSimObjectCells(terrainSimObjCells);
 
                 // Foliage
-                AddObjectToDb(simObjectData.Foliage[0]);
-
+                foreach (var foliage in simObjectData.Foliage)
+                    AddObjectToDb(foliage);
+                
                 // Buildings
-                AddObjectToDb(simObjectData.Buildings[0]);
+                foreach (var building in simObjectData.Buildings)
+                    AddObjectToDb(building);
 
                 _processStaticObjects = false;
             }
 
             // Aerial vehicles
-            AddObjectToDb(simObjectData.AerialVehicles[0]);
+            foreach (var aerialVehicle in simObjectData.AerialVehicles)
+                AddObjectToDb(aerialVehicle);
 
             // Aerial animals
-            AddObjectToDb(simObjectData.AerialAnimals[0]);
+            foreach (var aerialAnimal in simObjectData.AerialAnimals)
+                AddObjectToDb(aerialAnimal);
 
             // Ground animals
-            AddObjectToDb(simObjectData.GroundAnimals[0]);
+            foreach (var groundAnimal in simObjectData.GroundAnimals)
+                AddObjectToDb(groundAnimal);
         }
 
         private void AddObjectToDb(SimObject obj)

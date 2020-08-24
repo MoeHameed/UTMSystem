@@ -64,12 +64,6 @@ namespace MappingSystem
         public const int NumCellX = 391;
         public const int NumCellY = 434;
         public const int NumCellZ = 127;
-        public const double MinLat = 51.241700;
-        public const double MaxLat = 51.245600;
-        public const double MinLon = -114.885100;
-        public const double MaxLon = -114.879500;
-        public const double LatDiff = 0.000008986175;
-        public const double LonDiff = 0.00001432225;
 
         public static List<Tuple<int, int, int>> ObjectToCells(GeoCoordinate topLeft, int sizeX, int sizeY, int sizeZ)
         {
@@ -89,24 +83,24 @@ namespace MappingSystem
         {
             // Calculate x coord based on longitude
             var xMultiplier = 0;
-            if (Math.Abs(coordinate.Longitude - MinLon) < 0.000001)
+            if (Math.Abs(coordinate.Longitude - Constants.MinLon) < 0.000001)
                 xMultiplier = 1;
-            else if (coordinate.Longitude >= MaxLon)
+            else if (coordinate.Longitude >= Constants.MaxLon)
                 xMultiplier = NumCellX;
             else
-                while (MinLon + (xMultiplier * LonDiff) < coordinate.Longitude)
+                while (Constants.MinLon + (xMultiplier * Constants.LonDiff) < coordinate.Longitude)
                     xMultiplier++;
             var x = xMultiplier - 1;
             if(x < 0) throw new ApplicationException("X IS LESS THAN 0");
             
             // Calculate y coord based on latitude
             var yMultiplier = 0;
-            if (Math.Abs(coordinate.Latitude - MinLat) < 0.000001)
+            if (Math.Abs(coordinate.Latitude - Constants.MinLat) < 0.000001)
                 yMultiplier = 1;
-            else if (coordinate.Latitude >= MaxLat)
+            else if (coordinate.Latitude >= Constants.MaxLat)
                 yMultiplier = NumCellY;
             else
-                while (MinLat + (yMultiplier * LatDiff) < coordinate.Latitude)
+                while (Constants.MinLat + (yMultiplier * Constants.LatDiff) < coordinate.Latitude)
                     yMultiplier++;
             var y = yMultiplier - 1;
             if (y < 0) throw new ApplicationException("Y IS LESS THAN 0");
